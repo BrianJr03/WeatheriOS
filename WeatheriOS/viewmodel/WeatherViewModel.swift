@@ -22,6 +22,20 @@ class WeatherViewModel: ObservableObject {
         return currentForecast?.weatherCode ?? 0
     }
     
+    func getTempRange() -> String {
+        let currentForecast = forecasts.first
+        guard let forecast = currentForecast else { return "--°F - --°F" }
+        return "\(Int(forecast.minTemp))°F - \(Int(forecast.maxTemp))°F"
+    }
+    
+    func getWeatherHeadline() -> [WeatherLine] {
+        return getWeatherLines(for: getCurrentWeatherCode())
+    }
+    
+    func getWeatherSarcasmText() -> String {
+        return getWeatherSarcasm(for: getCurrentWeatherCode())
+    }
+    
     init(
         forecasts: [Forecast] = [Forecast](),
         isLoading: Bool = false
@@ -29,9 +43,9 @@ class WeatherViewModel: ObservableObject {
         self.forecasts = [
             Forecast(
                 date: "2025-05-05",
-                maxTemp: 18.0,
-                minTemp: 10.0,
-                weatherCode: 61,
+                maxTemp: 75.0,
+                minTemp: 58.0,
+                weatherCode: 65,
                 precipitation: 0.0,
                 maxWindSpeed: 12.0,
                 sunrise: "2025-05-05T05:42",
@@ -39,8 +53,8 @@ class WeatherViewModel: ObservableObject {
             ),
             Forecast(
                 date: "2025-05-06",
-                maxTemp: 15.0,
-                minTemp: 9.0,
+                maxTemp: 62.0,
+                minTemp: 48.0,
                 weatherCode: 3,
                 precipitation: 0.2,
                 maxWindSpeed: 18.0,
@@ -49,8 +63,8 @@ class WeatherViewModel: ObservableObject {
             ),
             Forecast(
                 date: "2025-05-07",
-                maxTemp: 12.0,
-                minTemp: 7.0,
+                maxTemp: 54.0,
+                minTemp: 44.0,
                 weatherCode: 61,
                 precipitation: 4.5,
                 maxWindSpeed: 24.0,
@@ -59,8 +73,8 @@ class WeatherViewModel: ObservableObject {
             ),
             Forecast(
                 date: "2025-05-08",
-                maxTemp: 10.0,
-                minTemp: 6.0,
+                maxTemp: 50.0,
+                minTemp: 41.0,
                 weatherCode: 63,
                 precipitation: 8.2,
                 maxWindSpeed: 30.0,
@@ -69,8 +83,8 @@ class WeatherViewModel: ObservableObject {
             ),
             Forecast(
                 date: "2025-05-09",
-                maxTemp: 13.0,
-                minTemp: 8.0,
+                maxTemp: 55.0,
+                minTemp: 46.0,
                 weatherCode: 45,
                 precipitation: 0.0,
                 maxWindSpeed: 15.0,
@@ -79,8 +93,8 @@ class WeatherViewModel: ObservableObject {
             ),
             Forecast(
                 date: "2025-05-10",
-                maxTemp: 16.0,
-                minTemp: 9.0,
+                maxTemp: 70.0,
+                minTemp: 54.0,
                 weatherCode: 1,
                 precipitation: 0.0,
                 maxWindSpeed: 10.0,
@@ -89,8 +103,8 @@ class WeatherViewModel: ObservableObject {
             ),
             Forecast(
                 date: "2025-05-11",
-                maxTemp: 19.0,
-                minTemp: 11.0,
+                maxTemp: 78.0,
+                minTemp: 60.0,
                 weatherCode: 0,
                 precipitation: 0.0,
                 maxWindSpeed: 8.0,
